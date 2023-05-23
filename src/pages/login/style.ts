@@ -13,3 +13,33 @@ width:311px;
 height:390px;
 background:white;
 `
+export const Input = styled.input` 
+background: #D9D9D9;
+width:80%;
+height:38px;
+border:none;
+`
+export const Button = styled.button`
+background:#6E3EF7;
+width:40%;
+height:30px;
+color:white;
+`
+export const LogoContainer = styled.div`
+width:100%;
+height:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+`
+export const LogoImg = styled.img`
+height:62px;
+`
+export const InputContainer = styled.div`
+height:50%;
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:space-around;
+align-items:center;
+`
