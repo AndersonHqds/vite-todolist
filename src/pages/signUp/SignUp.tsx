@@ -5,7 +5,8 @@ import {
     Button,
     LogoContainer,
     LogoImg,
-    InputContainer
+    InputContainer,
+    PasswordDoesNotMatchMessage
 } from "./style";
 import logo from "../../assets/logo.png"
 import { useState } from "react"
@@ -23,6 +24,21 @@ function SignUp() {
         })
     }
 
+    function isThePasswordsMatch() {
+        return password === confirmPassword;
+    }
+
+    const isButtonDisabled = () => {
+        const usernameLength = username.trim().length;
+        const passwordLength = password.trim().length;
+        const confirmPasswordLength = confirmPassword.trim().length;
+        if (usernameLength === 0 || passwordLength === 0 || confirmPasswordLength === 0 || !isThePasswordsMatch()) {
+            return true;
+        } 
+        return false;
+        
+    }
+
     return (
         <Container>
             <Form>
@@ -34,7 +50,8 @@ function SignUp() {
 
                     <Input placeholder="Password" type="password" onChange={event => setPassword(event.target.value)} />
                     <Input placeholder="Confirm your password" type="password" onChange={event => setConfirmPassword(event.target.value)} />
-                    <Button disabled={username.length === 0 || password.length === 0 || confirmPassword.length === 0}
+                    { !isThePasswordsMatch() && <PasswordDoesNotMatchMessage>Password does not match</PasswordDoesNotMatchMessage>}
+                    <Button disabled={ isButtonDisabled() }
                     onClick={onSubmit}>
 
                         Sign Up
