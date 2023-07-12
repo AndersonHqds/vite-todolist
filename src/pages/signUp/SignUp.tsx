@@ -11,6 +11,7 @@ import {
 import logo from "../../assets/logo.png"
 import { useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom";
 function SignUp() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -58,6 +59,8 @@ function SignUp() {
                     </Button>
                 </InputContainer>
             </Form>
+
+            <Link to="/login">Navegar para Login</Link>
         </Container>
     )
 
