@@ -1,11 +1,11 @@
-import SignUp  from "./pages/signUp/SignUp";
+import Main from "./pages/main/Main";
 
 function App() {
- 
+
   return (
-    <SignUp/>
-  
-     
+    <Main />
+
+
 
   );
 }
