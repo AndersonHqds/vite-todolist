@@ -24,10 +24,15 @@ background:#6E3EF7;
 width:40%;
 height:30px;
 color:white;
+position: relative;
+bottom:10px;
+&:disabled {
+    opacity: 0.5;
+}
 `
 export const LogoContainer = styled.div`
 width:100%;
-height:50%;
+height:40%;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -36,10 +41,13 @@ export const LogoImg = styled.img`
 height:62px;
 `
 export const InputContainer = styled.div`
-height:50%;
+height:60%;
 width:100%;
 display:flex;
 flex-direction:column;
 justify-content:space-around;
 align-items:center;
 `
+export const ErrorMessage = styled.span`
+color: red; 
+` 
