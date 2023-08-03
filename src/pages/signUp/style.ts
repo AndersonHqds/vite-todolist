@@ -48,6 +48,6 @@ flex-direction:column;
 justify-content:space-around;
 align-items:center;
 `
-export const PasswordDoesNotMatchMessage = styled.span `
+export const PasswordDoesNotMatchMessage = styled.span`
 color: red; 
 ` 

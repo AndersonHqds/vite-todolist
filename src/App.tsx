@@ -1,5 +1,6 @@
 import Login from "./pages/login/Login";
-import SignUp  from "./pages/signUp/SignUp";
+import SignUp from "./pages/signUp/SignUp";
+import Main from "./pages/main/Main";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -7,7 +8,7 @@ import {
 
 
 function App() {
- 
+
 
   const router = createBrowserRouter([
     {
@@ -26,13 +27,17 @@ function App() {
       path: "/signup",
       element: <SignUp />
     },
+    {
+      path: "/dashboard",
+      element: <Main />
+    }
 
   ]);
 
   return (
     <RouterProvider router={router} />
-  
-    
+
+
   );
 }
 

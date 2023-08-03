@@ -5,62 +5,51 @@ import {
     Button,
     LogoContainer,
     LogoImg,
-    InputContainer, 
+    InputContainer,
     ErrorMessage
 } from "./style";
 import logo from "../../assets/logo.png"
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import axios from "axios";
-function Login(){
+function Login() {
 
     const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")    
+    const [password, setPassword] = useState("")
     const [error, setError] = useState("")
 
 
     useEffect(() => {
         setError("")
 
-    },[username, password])
-  
+    }, [username, password])
+
 
     const onSubmit = async (event: any) => {
         event.preventDefault()
-       
-       try{
-        const token = await axios.post("http://localhost:3001/login", {
-            username: username,
-            password: password
-        });
-        console.log(token.data.token);
-        localStorage.setItem('authToken', token.data.token);
+
+        try {
+            const token = await axios.post("http://localhost:3001/login", {
+                username: username,
+                password: password
+            });
+            console.log(token.data.token);
+            localStorage.setItem('authToken', token.data.token);
         }
-        catch(error) {
+        catch (error) {
             setError(error.response.data)
             console.log(error.response.data);
         }
-        
-    }
 
-/*
-    const onSubmit = (event: any) => {
-        event.preventDefault()
-        axios.post("http://localhost:3001/login", {
-            username: username,
-            password: password
-        })
     }
-*/
-
 
     const isButtonDisabled = () => {
         const usernameLength = username.trim().length;
         const passwordLength = password.trim().length;
         if (usernameLength === 0 || passwordLength === 0) {
             return true;
-        } 
+        }
         return false;
-        
+
     }
 
     return (
@@ -75,8 +64,8 @@ function Login(){
 
                     <Input placeholder="Password" type="password" onChange={event => setPassword(event.target.value)} />
                     {error.length > 0 && <ErrorMessage>{error}</ErrorMessage>}
-                    <Button disabled={ isButtonDisabled() }
-                    onClick={onSubmit}>
+                    <Button disabled={isButtonDisabled()}
+                        onClick={onSubmit}>
                         Login
                     </Button>
                 </InputContainer>

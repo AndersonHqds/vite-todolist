@@ -48,6 +48,6 @@ flex-direction:column;
 justify-content:space-around;
 align-items:center;
 `
-export const ErrorMessage = styled.span `
+export const ErrorMessage = styled.span`
 color: red; 
 ` 
