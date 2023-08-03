@@ -13,8 +13,5 @@ export default function TodoItem({ text, onSelect }: Props) {
     return <Container>
         <input type="checkbox" />
         <label>{text}</label>
-        {
-            text
-        }
     </Container>
 }

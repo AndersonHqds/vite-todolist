@@ -10,7 +10,38 @@ import {
 } from "./style";
 import logo from "../../assets/logo.png"
 import TodoItem from "../../components/TodoItem";
+import { useState, useEffect } from "react"
+import axios from "axios"
 function Main() {
+    const [todoContent, setTodoContent] = useState("")
+    const [todos, setTodos] = useState([])
+    const createTodo = async (e) => {
+        e.preventDefault()
+        const result = await axios.post("http://localhost:3001/todo", {
+            content: todoContent
+        }, {
+            headers: {
+                token: localStorage.getItem("authToken")
+            }
+        })
+        console.log(result)
+        setTodos([...todos, {
+            content: todoContent
+        }])
+        setTodoContent("")
+    }
+    useEffect(() => {
+        const getTodo = async () => {
+            const response = await axios.get("http://localhost:3001/todo", {
+                headers: {
+                    token: localStorage.getItem("authToken")
+                }
+            })
+            setTodos(response.data)
+            console.log(response)
+        }
+        getTodo()
+    }, [])
     return (
         <Container>
             <Header>
@@ -22,13 +53,16 @@ function Main() {
                 <option value="todos">Todos</option>
             </Status>
             <TodoContainer>
-                <TodoItem text="Passar pano na casa" />
-                <TodoItem text="Lavar Louça"/>
+                {
+                    todos.map(todo => {
+                        return <TodoItem text={todo.content} />
+                    })
+                }
 
             </TodoContainer>
-            <TodoInput>
+            <TodoInput onChange={e => setTodoContent(e.target.value)} value={todoContent}>
             </TodoInput>
-            <TodoButton>
+            <TodoButton onClick={createTodo}>
                 Add
             </TodoButton>
         </Container>
