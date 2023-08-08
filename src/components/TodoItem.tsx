@@ -6,12 +6,13 @@ import {
 
 type Props = {
     text: String;
-    onSelect?: () => void;
+    onSelect: () => void;
+    checked: boolean;
 }
 
-export default function TodoItem({ text, onSelect }: Props) {
+export default function TodoItem({ text, onSelect, checked }: Props) {
     return <Container>
-        <input type="checkbox" />
+        <input type="checkbox" checked={checked} onChange={onSelect}/>
         <label>{text}</label>
     </Container>
 }
