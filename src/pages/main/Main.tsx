@@ -31,6 +31,7 @@ function Main() {
         setTodoContent("")
     }
     useEffect(() => {
+        //Disparado quando a página for aberta
         const getTodo = async () => {
             const response = await axios.get("http://localhost:3001/todo", {
                 headers: {
@@ -38,10 +39,34 @@ function Main() {
                 }
             })
             setTodos(response.data)
+            //Todos que o backend devolveu
             console.log(response)
         }
         getTodo()
     }, [])
+
+    const onCheckboxSelected= async (event, _id) => {
+        console.log(_id);
+        const isChecked = event.target.checked;
+        await axios.patch("http://localhost:3001/todo", {
+            status: isChecked,
+            id: _id
+        }, {
+            headers: {
+                token: localStorage.getItem("authToken")
+            }
+        })
+        const todoChecked = todos.map(todo => {
+            if(todo._id === _id) {
+                return {
+                    ...todo,
+                    status: isChecked
+                }
+            }
+            return todo;
+        })
+        setTodos(todoChecked)
+    }
     return (
         <Container>
             <Header>
@@ -55,7 +80,8 @@ function Main() {
             <TodoContainer>
                 {
                     todos.map(todo => {
-                        return <TodoItem text={todo.content} />
+                        console.log(todo);
+                        return <TodoItem onSelect={(event) => onCheckboxSelected(event, todo._id)} text={todo.content} checked={todo.status} key={todo._id}/>
                     })
                 }
 
